@@ -18,7 +18,9 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "start": "node dist/cli.js"
+    "start": "node dist/cli.js",
+    "website:build": "npm --prefix website run build",
+    "website:dev": "npm --prefix website run dev"
   },
   "author": "carbonthecoder",
   "license": "MIT",

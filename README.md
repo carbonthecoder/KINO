@@ -17,6 +17,12 @@ Minimal terminal stream launcher for movies, television, and anime.
 ## Quickstart
 
 ```bash
+curl -fsSL https://raw.githubusercontent.com/carbonthecoder/KINO/main/website/public/install.sh | bash
+```
+
+Or clone and build manually:
+
+```bash
 git clone https://github.com/carbonthecoder/KINO.git
 cd KINO
 npm install
@@ -76,6 +82,19 @@ KINO includes an unpackaged Manifest V3 browser extension in [`extension/`](exte
 
 ---
 
+## Website
+
+The landing page lives in [`website/`](website/). To run locally:
+
+```bash
+npm run website:dev
+```
+
+When importing the repository to Vercel, set the Root Directory to `website`, or use the included `vercel.json` for automatic root deployments.
+
+---
+
 ## License
 
 MIT
+
