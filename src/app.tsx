@@ -212,17 +212,17 @@ function AppContent() {
   const hints: Array<[string, string]> = (() => {
     switch (phase.name) {
       case 'input':
-        return [['tab', 'mode'], ['↵', 'search'], ['^c', 'quit']]
+        return [['tab', 'mode'], ['enter', 'search'], ['^c', 'quit']]
       case 'searching':
         return [['esc', 'cancel'], ['^c', 'quit']]
       case 'results':
-        return [['tab', 'mode'], ['↑↓', 'choose'], ['pg', 'scroll'], ['↵', 'watch'], ['esc', 'back'], ['^c', 'quit']]
+        return [['tab', 'mode'], ['up/down', 'choose'], ['pg', 'scroll'], ['enter', 'watch'], ['esc', 'back'], ['^c', 'quit']]
       case 'empty':
-        return [['tab', 'mode'], ['↵', 'search again'], ['esc', 'back'], ['^c', 'quit']]
+        return [['tab', 'mode'], ['enter', 'search again'], ['esc', 'back'], ['^c', 'quit']]
       case 'watching':
         return [['esc', 'back'], ['^c', 'quit']]
       case 'error':
-        return [['↵', 'try again'], ['^c', 'quit']]
+        return [['enter', 'try again'], ['^c', 'quit']]
     }
   })()
 
@@ -260,7 +260,7 @@ function AppContent() {
       <Logo />
       <Gap />
       <Text color={theme.primary}>{TAGLINE}</Text>
-      <Text color={theme.gray} dimColor={theme.dimSecondary}>movies · series · anime</Text>
+      <Text color={theme.gray} dimColor={theme.dimSecondary}>movies | series | anime</Text>
       <Gap />
 
       {phase.name === 'input' && (
@@ -282,18 +282,18 @@ function AppContent() {
               onSubmit={handleSubmit}
               placeholder={
                 mode === 'movies'
-                  ? 'Inception, Dune, Oppenheimer…'
+                  ? 'Inception, Dune, Oppenheimer...'
                   : mode === 'series'
-                  ? 'Breaking Bad, Game of Thrones, Dark…'
-                  : 'Attack on Titan, Jujutsu Kaisen, One Piece…'
+                  ? 'Breaking Bad, Game of Thrones, Dark...'
+                  : 'Attack on Titan, Jujutsu Kaisen, One Piece...'
               }
               width={boxWidth - 6}
             />
           </FramedInput>
           {phase.warning ? (
-            <Text color={theme.gray} dimColor={theme.dimSecondary}>× {phase.warning}</Text>
+            <Text color={theme.gray} dimColor={theme.dimSecondary}>x {phase.warning}</Text>
           ) : (
-            <Text color={theme.gray} dimColor={theme.dimSecondary}>↵ to search · Tab to switch mode</Text>
+            <Text color={theme.gray} dimColor={theme.dimSecondary}>[enter] search | [tab] mode</Text>
           )}
 
           {history.length > 0 && !query && (
@@ -322,12 +322,12 @@ function AppContent() {
           <ModeTabs />
           <FramedInput title={mode === 'movies' ? 'Search Movies' : mode === 'series' ? 'Search Series' : 'Search Anime'} width={boxWidth} buttonDim>
             <Text color={theme.gray} dimColor={theme.dimSecondary}>
-              {query.length > boxWidth - 8 ? `${query.slice(0, boxWidth - 9)}…` : query}
+              {query.length > boxWidth - 8 ? `${query.slice(0, boxWidth - 9)}...` : query}
             </Text>
           </FramedInput>
           <Gap />
           <Text color={theme.gray} dimColor={theme.dimSecondary}>
-            <Spinner type="dots" /> searching {mode}…
+            <Spinner type="dots" /> searching {mode}...
           </Text>
         </Box>
       )}
@@ -349,7 +349,7 @@ function AppContent() {
                       ))}
                       <Gap />
                       <Text color={theme.gray} dimColor={theme.dimSecondary}>
-                        {'· ' + mediaType(r, mode)}{r.vote_average ? ` · ${r.vote_average.toFixed(1)}` : ''}{r.release_date || r.first_air_date ? ` · ${(r.release_date || r.first_air_date)!.slice(0, 4)}` : ''}
+                        {'| ' + mediaType(r, mode)}{r.vote_average ? ` | ${r.vote_average.toFixed(1)}` : ''}{r.release_date || r.first_air_date ? ` | ${(r.release_date || r.first_air_date)!.slice(0, 4)}` : ''}
                       </Text>
                       {r.overview && (
                         <>
@@ -373,7 +373,7 @@ function AppContent() {
                       <Text key={i} bold color={theme.primary}>{line}</Text>
                     ))}
                     <Text color={theme.gray} dimColor={theme.dimSecondary}>
-                      {'· ' + mediaType(r, mode)}{r.vote_average ? ` · ${r.vote_average.toFixed(1)}` : ''}{r.release_date || r.first_air_date ? ` · ${(r.release_date || r.first_air_date)!.slice(0, 4)}` : ''}
+                      {'| ' + mediaType(r, mode)}{r.vote_average ? ` | ${r.vote_average.toFixed(1)}` : ''}{r.release_date || r.first_air_date ? ` | ${(r.release_date || r.first_air_date)!.slice(0, 4)}` : ''}
                     </Text>
                   </Box>
                 )
@@ -399,8 +399,8 @@ function AppContent() {
                 })}
                 {phase.results.length > maxVisible && (
                   <Text color={theme.gray} dimColor={theme.dimSecondary}>
-                    {scrollOffset > 0 ? '  ↑ more above' : ''}
-                    {scrollOffset + maxVisible < phase.results.length ? '  ↓ more below' : ''}
+                    {scrollOffset > 0 ? '  ^ more above' : ''}
+                    {scrollOffset + maxVisible < phase.results.length ? '  v more below' : ''}
                   </Text>
                 )}
                 <Text color={theme.gray} dimColor={theme.dimSecondary}>
@@ -415,7 +415,7 @@ function AppContent() {
       {phase.name === 'empty' && (
         <Box flexDirection="column" alignItems="center">
           <Text color={theme.gray} dimColor={theme.dimSecondary}>
-            × no results for <Text color={theme.primary}>"{truncate(phase.query, 40)}"</Text>
+            x no results for <Text color={theme.primary}>"{truncate(phase.query, 40)}"</Text>
           </Text>
           <Gap />
           <Text color={theme.gray} dimColor={theme.dimSecondary}>check the spelling or try another title.</Text>
@@ -427,13 +427,13 @@ function AppContent() {
           <Text color={theme.primary}>
             <Spinner type="dots" />
           </Text>
-          <Text color={theme.gray} dimColor={theme.dimSecondary}> opening {truncate(phase.title, 30)} in browser…</Text>
+          <Text color={theme.gray} dimColor={theme.dimSecondary}> opening {truncate(phase.title, 30)} in browser...</Text>
         </Box>
       )}
 
       {phase.name === 'error' && (
         <Box flexDirection="column" alignItems="center">
-          <Text bold color={theme.primary}>× {phase.message}</Text>
+          <Text bold color={theme.primary}>x {phase.message}</Text>
         </Box>
       )}
 

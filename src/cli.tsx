@@ -1,6 +1,13 @@
 import React from 'react'
 import {readFileSync} from 'node:fs'
+import {execSync} from 'node:child_process'
 import {render} from 'ink'
+
+if (process.platform === 'win32') {
+  try {
+    execSync('chcp 65001', {stdio: 'ignore'})
+  } catch {}
+}
 import {App} from './app.js'
 
 const HELP = `

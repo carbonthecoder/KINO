@@ -40,7 +40,7 @@ export function FramedInput({
       </Box>
       {button ? (
         <Box flexDirection="column" width={buttonW}>
-          <Text bold color={fillColor} dimColor={buttonDim && theme.dimSecondary}>{'▄'.repeat(buttonW)}</Text>
+          <Text bold color={fillColor} dimColor={buttonDim && theme.dimSecondary}>{'='.repeat(buttonW)}</Text>
           <Text
             backgroundColor={theme.inverseButton ? undefined : fillColor}
             color={theme.inverseButton ? undefined : theme.dark}
@@ -48,7 +48,7 @@ export function FramedInput({
             dimColor={buttonDim && theme.dimSecondary}
             bold
           >{`  ${button}  `}</Text>
-          <Text bold color={fillColor} dimColor={buttonDim && theme.dimSecondary}>{'▀'.repeat(buttonW)}</Text>
+          <Text bold color={fillColor} dimColor={buttonDim && theme.dimSecondary}>{'='.repeat(buttonW)}</Text>
         </Box>
       ) : null}
     </Box>
