@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "KINO Popup Shield",
+  "version": "1.0.0",
+  "description": "Automatically destroys popup ad tabs spawned from KINO player in under 10ms.",
+  "permissions": ["tabs"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
